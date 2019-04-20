@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>TodoList</title>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+	</head>
+	<div id="app">
+		<input type="text" v-model="inputValue"/>
+		<button v-on:click="handlebtnClick">提交</button>
+		<ul>
+			<li v-for="item in list">{{item}}</li>
+		</ul>
+	</div>
+	
+	<script type="text/javascript" >
+		var app = new Vue({
+			el: '#app',
+			data: {
+				list: ['第一课的内容','第二课的内容'],
+				inputValue: ''
+			},
+			methods: {
+				handlebtnClick:function() {
+					this.list.push(this.inputValue)
+					this.inputValue=''
+				}
+			}
+		})
+	</script>
+	<body>
+	</body>
+</html>
