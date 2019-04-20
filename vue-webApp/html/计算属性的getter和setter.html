@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>计算属性的getter和setter方法</title>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+	</head>
+	<body>
+		<div id="app">
+			{{fullName}}
+			{{age}}
+		</div>
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					firstName: 'Vicky',
+					lastName: 'Wei',
+					age: 27
+				},
+				computed: {
+					fullName: {
+						get: function() {
+							return this.firstName + ' '+ this.lastName
+						},
+						set: function(value) {
+							console.log(value);
+							var arr = value.split(' ');
+							this.firstName = arr[0];
+							this.lastName = arr[1];
+						}
+					}
+				}
+					
+//				computed: {
+//					fullName: function() {
+//						return this.firstName + ' '+ this.lastName
+//					}
+//				}
+			})
+		</script>
+	</body>
+</html>
