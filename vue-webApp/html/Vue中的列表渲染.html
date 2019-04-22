@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Vue中的数组列表渲染 </title>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+	</head>
+	<body>
+		<div id="app">
+			<div v-for="(item,key,index) of userInfo">
+				{{item}}--{{key}}---{{index}}
+			</div>
+			<!--template模版占位符，包裹元素，不会被渲染到页面上-->
+			<!--<template v-for="(item,index) of list" 
+				:key="item.id">
+				<div>
+				{{item.text}}------{{index}}
+				</div>
+				<span>{{item.text}}</span>
+			</template>			-->
+		</div>
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					//对象循环
+					userInfo: {
+						name: 'Vicky',
+						age:27,
+						sex: '女'
+					}
+					//数组循环
+//					list: [{
+//						id: '001',
+//						text: 'Hello'
+//					}, {
+//						id: '002',
+//						text: 'Vicky'
+//					}, {
+//						id: '003',
+//						text: 'Wei'
+//					}]
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Vue的条件渲染</title>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+	</head>
+	<body>
+		<div id="app">
+			<!--v-if不存在dom上-->
+			<div v-if="show === 'a' ">This is A</div>
+			<div v-else-if="show === 'b' ">This is B</div>
+			<!--v-else要与v-if连着使用-->
+			<div v-else>Bye world</div>
+			<!--v-show以display：none存在页面上-->
+			<div v-show="show">{{message}}</div>
+			<!--key值-->
+			<div v-if="op">
+				username:<input key="username"/>
+			</div>
+			<div v-else>
+				email:<input key="email"/>
+			</div>
+		</div>
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					message: 'Hello World!',
+					//show: false
+					show: 'a',
+					op: false
+				}
+			})
+		</script>
+	</body>
+</html>
