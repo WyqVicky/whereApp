@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Vue组件中ref的引用</title>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+	</head>
+	<body>
+		<div id="app">
+			<counter ref='one' @change="handelChange"></counter>
+			<counter ref='two' @change="handelChange"></counter>
+			<div>{{total}}</div>
+		</div>
+		<script>
+			Vue.component('counter',{
+				template: '<div @click="handleClick">{{number}}</div>',
+				data: function() {
+					return {
+						number: 0
+					}
+				},
+				methods: {
+					handleClick: function() {
+						this.number ++
+						this.$emit('change')
+					}
+				}
+			})
+			var vm = new Vue({
+				el:'#app',
+				data: {
+					total: 0
+				},
+				methods: {
+					handelChange: function(){
+						this.total = this.$refs.one.number + this.$refs.two.number
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Vue中ref引用</title>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+	</head>
+	<body>
+		<div id="app">
+			<!--Vue不建议在代码里操作dom，在div这样的元素标签上加ref，通过this.$refs获取到的内容时，获取到的是DOM元素-->
+			<div ref="hello"  
+				@click="handleClick">
+				Hello World
+			</div>
+			<!--在组件上加上ref，通过this.$refs获取到的内容时，获取到的是子组件的引用-->
+		</div>
+		<script>
+			var vm =new Vue({
+				el: '#app',
+				methods: {
+					handleClick: function() {
+						//在Vue中获取DOM节点的内容
+						console.log(this.$refs.hello.innerHTML)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
