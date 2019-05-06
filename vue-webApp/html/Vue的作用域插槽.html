@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Vue的作用域插槽</title>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+	</head>
+	<body>
+		<div id="app">
+			<child>
+				<!--用child的时，用的数据放在slot-scope后面的属性里-->
+				<!--每一块应该显示成什么样式，不由子组件决定，而是父组件调子组件的时候给子组件传递对应的模版-->
+				<!--父组件调用子组件时给子组件传了一个插槽，这个插槽是作用域插槽，
+				必须是一个template开头结尾的内容，同时要声明以h1的形式对数据进行展示-->
+				<template slot-scope="props">
+					<li>{{props.item}}---hello</li>
+				</template>
+			</child>
+		</div>
+		<script>
+			Vue.component('child',{
+				data: function() {
+					return {
+						list:[1, 2, 3, 4]
+					}
+				},
+				//怎么显示外部告诉怎么显示,当子组件用slot的时候，会往slot里传递一个item的数据
+				
+				//当子组件做循环或者某一部分的DOM由外部传进来时，这时用作用域插槽
+				//使用作用域插槽，子组件可以向父组件里的插槽传数据，
+				template: '<div><ul><slot v-for="item of list" :item=item></slot></ul></div>'
+			})
+			var vm = new Vue({
+				el: '#app'
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>非父子组件的传值(Bus/总线/发布订阅模式/观察者模式)</title>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+	</head>
+	<body>
+		<div id="app">
+			<child content='Vicky'></child>
+			<child content='Wei'></child>
+		</div>
+		<script>
+			//vue的prototype上挂载一个bus属性，这个属性指向vue实例
+			//每一个组件上都有bus属性
+			Vue.prototype.bus = new Vue()
+			//调用new.Vue()或创建组件时，每一个组件上都有bus属性，因为 每一个组件或者每一个vue实例都是通过Vue这个类创建的
+			Vue.component('child',{
+				props: {
+					content: String
+				},
+				data: function() {
+					return {
+						selfContent : this.content
+					}
+				},
+				template: '<div @click="handleClick">{{selfContent}}</div>',
+				methods: {
+					handleClick: function() {
+//						向外触发事件
+						this.bus.$emit('change',this.selfContent)
+					}
+				},
+				//监听触发的事件
+				mounted: function() {
+					//this作用域发生变化
+					var this_ = this
+					this_.bus.$on('change',function(msg) {
+						this_.selfContent = msg
+					})
+				}
+			})
+			var vm = new Vue({
+				el: '#app'
+			})
+		</script>
+	</body>
+</html>

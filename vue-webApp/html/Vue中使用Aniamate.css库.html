@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Vue中使用Animate.css库</title>
+		<script type="text/javascript" src="../js/vue.js" ></script>
+		<link rel="stylesheet" href="../style/animate.css" />
+		<style>
+			/*@keyframes bounce-in{
+				0% {
+					transform: scale(0);
+				}
+				50% {
+					transform: scale(1.5);
+				}
+				100% {
+					transform: scale(1);
+				}
+			}*/
+			/*.fade-enter,.fade-leave-to {
+				transform-origin: left center;
+				animation: bounce-in 1s;
+			}
+			.fade-enter-active,.fade-leave-active {
+				transform-origin: left center;
+				animation: bounce-in 1s reverse;
+			}*/
+			/*.active {
+				transform-origin: left center;
+				animation: bounce-in 1s;
+			}
+			.leave {
+				transform-origin: left center;
+				animation: bounce-in 1s reverse;
+			}*/
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<!--必须使用自定义class名字的一种形式来使用animate.css这个库
+				class类里必须有animated这样子的一个具体类
+			-->
+			<transition name="fade"
+						enter-active-class="animated jello"
+						leave-active-class="animated shake"
+			>
+				<div v-if="show">Hello World</div>
+			</transition>
+			<button @click="handldeClick">切换</button>
+		</div>
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					show: true
+				},
+				methods: {
+					handldeClick: function() {
+						this.show = !this.show
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
